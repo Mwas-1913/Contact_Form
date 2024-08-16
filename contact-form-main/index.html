@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Contact form</title>
+
+  <style>
+    body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: hsl(186, 15%, 59%);
+    }
+    main{
+      width: 80%;
+      background-color: hsl(0, 0%, 100%);
+      border-radius: 10px;
+    }
+    form, button, h1{
+      margin-left: 20px;
+    }
+    
+    .one{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    form #firstname, 
+    #lastname, 
+    #emailaddress{
+      display: block;
+      width: 90%;
+      height: 50px;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+    #emailaddress{
+      width: 95%;
+    }
+    .two{
+      margin-top: 50px;
+    }
+    .three{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 50px;
+    }
+    .three input{
+      margin-top: 15px;
+    }
+    .radio1, .radio2{
+      border: 1px solid black;
+      border-radius: 10px;
+      display: block;
+      width: 90%;
+      height: 50px;
+      text-align: center;
+    }
+    .radio2{
+      margin-top: 17px;
+    }
+    
+    .four{
+      margin-top: 50px;
+    }
+    textarea{
+      display: block;
+      width: 95%;
+      height: 100px;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+    .five{
+      margin-top: 40px;
+    }
+    
+    #button{
+      width: 94%;
+      height: 50px;
+      margin-bottom: 30px;
+      border: 0;
+      border-radius: 10px;
+      background-color: hsl(169, 82%, 27%);
+    }
+    
+    
+    
+  </style>
+</head>
+<body>
+  <main>
+
+    <h1>Contact Us</h1>
+    
+   <form class="one">
+   <div>
+    <label for="">First Name *<input id="firstname" type="text"></label>
+    <p id="firstnameerror"></p>
+   </div>
+   
+   <div>
+    <label for="">Last Name *<input id="lastname" type="text"></label>
+    <p id="lastnameerror"></p>
+   </div>
+   </form>
+  
+   <form class="two">
+    <label for="">Email Address *<input id="emailaddress" type="text"></label>
+     <p id="emailerror"></p>
+   </form>
+
+   <form class="three">
+    <div>
+     <label>Query Type *<div class="radio1"><input id="general" name="radio" type="radio"><span>General Enquiry</span></p></div></label>
+
+    </div>
+
+     <div>
+       <div class="radio2"><input id="support" name="radio" type="radio"><span>Support Request</span></div>
+     </div>
+     <p id="generalerror"></p>
+   </form>
+
+    <form class="four">
+     <label for="">Message *<textarea id="textarea"></textarea></label>
+     <p id="messageerror"></p>
+    </form>
+
+     <form class="five">
+      <label><input id="checkbox" type="checkbox"> I consent to being contacted by the team *</label>
+      <p id="checkboxerror"></p>
+     </form>
+
+    <button id="button" onclick="validateForm()">Submit</button>
+
+   </main> 
+
+   <script>
+    function validateForm(){
+      const first_name = document.getElementById("firstname").value;
+      const last_name = document.getElementById("lastname").value;
+      const email_address = document.getElementById("emailaddress").value;
+      const general_name = document.getElementById("general").checked;
+      const support_name = document.getElementById("support").checked;
+      const textarea_name = document.getElementById("textarea").value;
+      const checkbox_name = document.getElementById("checkbox").checked;
+
+
+      const firstname_error = document.getElementById("firstnameerror");
+      const lastname_error = document.getElementById("lastnameerror");
+      const email_error = document.getElementById("emailerror");
+      const general_error = document.getElementById("generalerror");
+      const message_error = document.getElementById("messageerror");
+      const checkbox_error = document.getElementById("checkboxerror");
+       
+      let isvalid =true;
+
+        //firstname, lastname, Mesage
+      if (first_name === "" || last_name === "" || textarea_name === "") {
+        firstname_error.textContent = "This field is required!";
+        firstname_error.style.color = "red";
+
+        lastname_error.textContent = "This field is required!";
+        lastname_error.style.color = "red";
+
+        message_error.textContent = "This field is required!";
+        message_error.style.color = "red"
+
+        isvalid = false;
+      }
+      else{
+        firstname_error.textContent = "";
+        lastname_error.textContent = "";
+        message_error.textContent = "";
+      }
+
+       //Email
+      if (!email_address.includes("@")) {
+        email_error.textContent = "Please enter a valid email address!";
+        email_error.style.color = "red";
+        isvalid = false;
+      }
+      else{
+        email_error.textContent = "";
+      }
+
+      //Query Type
+      if (!general_name && !support_name) {
+        general_error.textContent = "Please select a query type";
+        general_error.style.color = "red";
+        isvalid = false;
+      }
+      else{
+        general_error.textContent = "";
+      }
+
+     
+      //checkbox
+      if (!checkbox_name) {
+        checkbox_error.textContent = "To submit this form, please consent to being contacted";
+        checkbox_error.style.color = "red";
+        isvalid = false;
+      }
+      else{
+        checkbox_error.textContent = "";
+      }
+
+     if (isvalid) {
+      alert("Form submited successfuly");
+      location.reload();
+    }
+  }
+   </script>
+
+
+ 
+  
+</body>
+</hml>
